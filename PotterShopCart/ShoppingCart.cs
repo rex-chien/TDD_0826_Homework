@@ -1,4 +1,6 @@
-﻿namespace PotterShopCart
+﻿using System.Linq;
+
+namespace PotterShopCart
 {
     public class ShoppingCart
     {
@@ -6,9 +8,11 @@
         {
         }
 
-        public int CalculatePotterPrice(int[] buiedPotterSeries)
+        public int CalculatePotterPrice(int[] buyedPotterSeries)
         {
-            return 0;
+            var totalPrice = buyedPotterSeries.Sum() * 100;
+
+            return totalPrice;
         }
     }
 }
