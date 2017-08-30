@@ -82,7 +82,7 @@
 	Then 價格應為 5本+4本 = 695 元		
 	
 ### Scenario 10
-Given 第一集買了 4 本
+	Given 第一集買了 4 本
 	And 第二集買了 4 本
 	And 第三集買了 4 本
 	And 第四集買了 2 本
