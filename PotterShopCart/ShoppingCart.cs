@@ -23,12 +23,41 @@ namespace PotterShopCart
 
         public int CalculatePotterPrice(int[] buyedPotterSeries)
         {
-            var totalPrice = buyedPotterSeries.Sum() * 100.0;
-            var suiteCount = buyedPotterSeries.Where(amount => amount > 0).Count();
+            var suites = ArrangeBooksToSuites(buyedPotterSeries);
 
-            totalPrice *= (double) _discountMap[suiteCount];
+            var totalPrice = suites.Select(suite =>
+            {
+                var suitePrice = suite.Sum() * 100;
+                var suiteCount = suite.Where(amount => amount > 0).Count();
+
+                return suitePrice * _discountMap[suiteCount];
+            }).Sum();
 
             return (int)totalPrice;
+        }
+
+        private List<int[]> ArrangeBooksToSuites(int[] books)
+        {
+            List<int[]> suites = new List<int[]>();
+            int episodes = books.Length;
+
+            while (books.Any(amount => amount > 0))
+            {
+                int[] suite = new int[episodes];
+
+                for (int index = 0; index < episodes; index++)
+                {
+                    if (books[index] > 0)
+                    {
+                        suite[index] = 1;
+                        books[index]--;
+                    }
+                }
+
+                suites.Add(suite);
+            }
+
+            return suites;
         }
     }
 }
