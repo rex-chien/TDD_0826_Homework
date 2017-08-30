@@ -105,5 +105,21 @@ namespace PotterShopCart.Tests
             // assert
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void CalculatePriceTest_五集買的本數_1_2_2_0_0_總價_460()
+        {
+            // arrange
+            var shoppingCart = new ShoppingCart();
+            var buyedPotterSeries = new[] { 1, 2, 2, 0, 0 };
+
+            var expected = 460;
+
+            // act
+            var actual = shoppingCart.CalculatePotterPrice(buyedPotterSeries);
+
+            // assert
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
