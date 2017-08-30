@@ -63,7 +63,7 @@ namespace PotterShopCart.Tests
         {
             // arrange
             var shoppingCart = new ShoppingCart();
-            var buyedPotterSeries = new[] { 1, 1, 1, 0, 0 };
+            var buyedPotterSeries = new[] { 1, 1, 1, 1, 0 };
 
             var expected = 320;
 
