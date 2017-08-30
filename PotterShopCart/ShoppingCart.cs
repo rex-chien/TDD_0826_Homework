@@ -1,9 +1,20 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace PotterShopCart
 {
     public class ShoppingCart
     {
+        /// <summary>
+        /// Key: 一套有幾本; Value: 打幾折
+        /// </summary>
+        private Dictionary<int, decimal> _discountMap = new Dictionary<int, decimal>()
+        {
+            { 1, 1 },
+            { 2, 0.95m },
+            { 3, 0.9m }
+        };
+
         public ShoppingCart()
         {
         }
@@ -11,18 +22,11 @@ namespace PotterShopCart
         public int CalculatePotterPrice(int[] buyedPotterSeries)
         {
             var totalPrice = buyedPotterSeries.Sum() * 100.0;
+            var suiteCount = buyedPotterSeries.Where(amount => amount > 0).Count();
 
-            if (buyedPotterSeries.Where(amount => amount > 0).Count() == 2)
-            {
-                totalPrice *= 0.95;
-            }
+            totalPrice *= (double) _discountMap[suiteCount];
 
-            if (buyedPotterSeries.Where(amount => amount > 0).Count() == 3)
-            {
-                totalPrice *= 0.90;
-            }
-
-            return (int) totalPrice;
+            return (int)totalPrice;
         }
     }
 }
