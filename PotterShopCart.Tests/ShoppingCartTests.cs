@@ -1,9 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PotterShopCart;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace PotterShopCart.Tests
 {
@@ -15,12 +11,15 @@ namespace PotterShopCart.Tests
         {
             // arrange
             var shoppingCart = new ShoppingCart();
-            var buyedPotterSeries = new[] { 1, 0, 0, 0, 0 };
+            var potterBooks = new List<PotterBook>()
+            {
+                new PotterBook {Episode = 1}
+            };
 
             var expected = 100;
 
             // act
-            var actual = shoppingCart.CalculatePotterPrice(buyedPotterSeries);
+            var actual = shoppingCart.CalculateSuitePrice(potterBooks);
 
             // assert
             Assert.AreEqual(expected, actual);
@@ -31,12 +30,16 @@ namespace PotterShopCart.Tests
         {
             // arrange
             var shoppingCart = new ShoppingCart();
-            var buyedPotterSeries = new[] { 1, 1, 0, 0, 0 };
+            var potterBooks = new List<PotterBook>()
+            {
+                new PotterBook {Episode = 1},
+                new PotterBook {Episode = 2}
+            };
 
             var expected = 190;
 
             // act
-            var actual = shoppingCart.CalculatePotterPrice(buyedPotterSeries);
+            var actual = shoppingCart.CalculateSuitePrice(potterBooks);
 
             // assert
             Assert.AreEqual(expected, actual);
@@ -47,12 +50,17 @@ namespace PotterShopCart.Tests
         {
             // arrange
             var shoppingCart = new ShoppingCart();
-            var buyedPotterSeries = new[] { 1, 1, 1, 0, 0 };
+            var potterBooks = new List<PotterBook>()
+            {
+                new PotterBook {Episode = 1},
+                new PotterBook {Episode = 2},
+                new PotterBook {Episode = 3}
+            };
 
             var expected = 270;
 
             // act
-            var actual = shoppingCart.CalculatePotterPrice(buyedPotterSeries);
+            var actual = shoppingCart.CalculateSuitePrice(potterBooks);
 
             // assert
             Assert.AreEqual(expected, actual);
@@ -63,12 +71,18 @@ namespace PotterShopCart.Tests
         {
             // arrange
             var shoppingCart = new ShoppingCart();
-            var buyedPotterSeries = new[] { 1, 1, 1, 1, 0 };
+            var potterBooks = new List<PotterBook>()
+            {
+                new PotterBook {Episode = 1},
+                new PotterBook {Episode = 2},
+                new PotterBook {Episode = 3},
+                new PotterBook {Episode = 4}
+            };
 
             var expected = 320;
 
             // act
-            var actual = shoppingCart.CalculatePotterPrice(buyedPotterSeries);
+            var actual = shoppingCart.CalculateSuitePrice(potterBooks);
 
             // assert
             Assert.AreEqual(expected, actual);
@@ -79,12 +93,19 @@ namespace PotterShopCart.Tests
         {
             // arrange
             var shoppingCart = new ShoppingCart();
-            var buyedPotterSeries = new[] { 1, 1, 1, 1, 1 };
+            var potterBooks = new List<PotterBook>()
+            {
+                new PotterBook {Episode = 1},
+                new PotterBook {Episode = 2},
+                new PotterBook {Episode = 3},
+                new PotterBook {Episode = 4},
+                new PotterBook {Episode = 5}
+            };
 
             var expected = 375;
 
             // act
-            var actual = shoppingCart.CalculatePotterPrice(buyedPotterSeries);
+            var actual = shoppingCart.CalculateSuitePrice(potterBooks);
 
             // assert
             Assert.AreEqual(expected, actual);
@@ -95,12 +116,18 @@ namespace PotterShopCart.Tests
         {
             // arrange
             var shoppingCart = new ShoppingCart();
-            var buyedPotterSeries = new[] { 1, 1, 2, 0, 0 };
+            var potterBooks = new List<PotterBook>()
+            {
+                new PotterBook {Episode = 1},
+                new PotterBook {Episode = 2},
+                new PotterBook {Episode = 3},
+                new PotterBook {Episode = 3}
+            };
 
             var expected = 370;
 
             // act
-            var actual = shoppingCart.CalculatePotterPrice(buyedPotterSeries);
+            var actual = shoppingCart.CalculateSuitePrice(potterBooks);
 
             // assert
             Assert.AreEqual(expected, actual);
@@ -111,12 +138,19 @@ namespace PotterShopCart.Tests
         {
             // arrange
             var shoppingCart = new ShoppingCart();
-            var buyedPotterSeries = new[] { 1, 2, 2, 0, 0 };
+            var potterBooks = new List<PotterBook>()
+            {
+                new PotterBook {Episode = 1},
+                new PotterBook {Episode = 2},
+                new PotterBook {Episode = 2},
+                new PotterBook {Episode = 3},
+                new PotterBook {Episode = 3}
+            };
 
             var expected = 460;
 
             // act
-            var actual = shoppingCart.CalculatePotterPrice(buyedPotterSeries);
+            var actual = shoppingCart.CalculateSuitePrice(potterBooks);
 
             // assert
             Assert.AreEqual(expected, actual);
@@ -127,12 +161,22 @@ namespace PotterShopCart.Tests
         {
             // arrange
             var shoppingCart = new ShoppingCart();
-            var buyedPotterSeries = new[] { 2, 2, 2, 1, 1 };
+            var potterBooks = new List<PotterBook>()
+            {
+                new PotterBook {Episode = 1},
+                new PotterBook {Episode = 1},
+                new PotterBook {Episode = 2},
+                new PotterBook {Episode = 2},
+                new PotterBook {Episode = 3},
+                new PotterBook {Episode = 3},
+                new PotterBook {Episode = 4},
+                new PotterBook {Episode = 5}
+            };
 
             var expected = 640;
 
             // act
-            var actual = shoppingCart.CalculatePotterPrice(buyedPotterSeries);
+            var actual = shoppingCart.CalculateSuitePrice(potterBooks);
 
             // assert
             Assert.AreEqual(expected, actual);

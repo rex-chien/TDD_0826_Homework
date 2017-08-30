@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace PotterShopCart
 {
     public class ShoppingCart
     {
+        private const int PricePerBook = 100;
+
         /// <summary>
         /// Key: 一套有幾本; Value: 打幾折
         /// </summary>
@@ -21,38 +24,31 @@ namespace PotterShopCart
         {
         }
 
-        public int CalculatePotterPrice(int[] buyedPotterSeries)
+        public int CalculateSuitePrice(List<PotterBook> potterBooks)
         {
-            var suites = ArrangeBooksToSuites(buyedPotterSeries);
+            var suites = ArrangeBooksToSuites(potterBooks);
 
             var totalPrice = suites.Select(suite =>
             {
-                var suitePrice = suite.Sum() * 100;
-                var suiteCount = suite.Where(amount => amount > 0).Count();
+                var suiteCount = suite.Count;
 
-                return suitePrice * _discountMap[suiteCount];
+                return suiteCount * PricePerBook * _discountMap[suiteCount];
             }).Sum();
 
             return (int)totalPrice;
         }
 
-        private List<int[]> ArrangeBooksToSuites(int[] books)
+        private List<List<PotterBook>> ArrangeBooksToSuites(List<PotterBook> potterBooks)
         {
-            List<int[]> suites = new List<int[]>();
-            int episodes = books.Length;
+            var suites = new List<List<PotterBook>>();
 
-            while (books.Any(amount => amount > 0))
+            while (potterBooks.Any())
             {
-                int[] suite = new int[episodes];
+                var episodeGroups = potterBooks.GroupBy(b => b.Episode);
 
-                for (int index = 0; index < episodes; index++)
-                {
-                    if (books[index] > 0)
-                    {
-                        suite[index] = 1;
-                        books[index]--;
-                    }
-                }
+                var suite = episodeGroups.Select(g => g.First()).ToList();
+
+                suite.ForEach(book => potterBooks.Remove(book));
 
                 suites.Add(suite);
             }
