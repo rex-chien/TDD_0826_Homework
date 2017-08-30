@@ -208,5 +208,39 @@ namespace PotterShopCart.Tests
             // assert
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void CalculatePriceTest_五集買的本數_4_4_4_2_2_總價_1280()
+        {
+            // arrange
+            var shoppingCart = new ShoppingCart();
+            var potterBooks = new List<PotterBook>()
+            {
+                new PotterBook {Episode = 1},
+                new PotterBook {Episode = 1},
+                new PotterBook {Episode = 1},
+                new PotterBook {Episode = 1},
+                new PotterBook {Episode = 2},
+                new PotterBook {Episode = 2},
+                new PotterBook {Episode = 2},
+                new PotterBook {Episode = 2},
+                new PotterBook {Episode = 3},
+                new PotterBook {Episode = 3},
+                new PotterBook {Episode = 3},
+                new PotterBook {Episode = 3},
+                new PotterBook {Episode = 4},
+                new PotterBook {Episode = 4},
+                new PotterBook {Episode = 5},
+                new PotterBook {Episode = 5}
+            };
+
+            var expected = 1280;
+
+            // act
+            var actual = shoppingCart.CalculateSuitePrice(potterBooks);
+
+            // assert
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
