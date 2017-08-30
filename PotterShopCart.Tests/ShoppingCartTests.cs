@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PotterShopCart.Tests
 {
@@ -9,238 +10,152 @@ namespace PotterShopCart.Tests
         [TestMethod]
         public void CalculatePriceTest_五集買的本數_1_0_0_0_0_總價_100()
         {
-            // arrange
-            var shoppingCart = new ShoppingCart();
-            var potterBooks = new List<PotterBook>()
-            {
-                new PotterBook {Episode = 1}
-            };
+            var books = GeneratePotterBooksByEpisodeCount(
+                    ep1Count: 1
+                );
 
-            var expected = 100;
-
-            // act
-            var actual = shoppingCart.CalculateSuitePrice(potterBooks);
-
-            // assert
-            Assert.AreEqual(expected, actual);
+            AssertPriceShouldEqual(100, books);
         }
 
         [TestMethod]
         public void CalculatePriceTest_五集買的本數_1_1_0_0_0_總價_190()
         {
-            // arrange
-            var shoppingCart = new ShoppingCart();
-            var potterBooks = new List<PotterBook>()
-            {
-                new PotterBook {Episode = 1},
-                new PotterBook {Episode = 2}
-            };
+            var books = GeneratePotterBooksByEpisodeCount(
+                ep1Count: 1,
+                ep2Count: 1
+            );
 
-            var expected = 190;
-
-            // act
-            var actual = shoppingCart.CalculateSuitePrice(potterBooks);
-
-            // assert
-            Assert.AreEqual(expected, actual);
+            AssertPriceShouldEqual(190, books);
         }
 
         [TestMethod]
         public void CalculatePriceTest_五集買的本數_1_1_1_0_0_總價_270()
         {
-            // arrange
-            var shoppingCart = new ShoppingCart();
-            var potterBooks = new List<PotterBook>()
-            {
-                new PotterBook {Episode = 1},
-                new PotterBook {Episode = 2},
-                new PotterBook {Episode = 3}
-            };
+            var books = GeneratePotterBooksByEpisodeCount(
+                ep1Count: 1,
+                ep2Count: 1,
+                ep3Count: 1
+            );
 
-            var expected = 270;
-
-            // act
-            var actual = shoppingCart.CalculateSuitePrice(potterBooks);
-
-            // assert
-            Assert.AreEqual(expected, actual);
+            AssertPriceShouldEqual(270, books);
         }
 
         [TestMethod]
         public void CalculatePriceTest_五集買的本數_1_1_1_1_0_總價_320()
         {
-            // arrange
-            var shoppingCart = new ShoppingCart();
-            var potterBooks = new List<PotterBook>()
-            {
-                new PotterBook {Episode = 1},
-                new PotterBook {Episode = 2},
-                new PotterBook {Episode = 3},
-                new PotterBook {Episode = 4}
-            };
+            var books = GeneratePotterBooksByEpisodeCount(
+                ep1Count: 1,
+                ep2Count: 1,
+                ep3Count: 1,
+                ep4Count: 1
+            );
 
-            var expected = 320;
-
-            // act
-            var actual = shoppingCart.CalculateSuitePrice(potterBooks);
-
-            // assert
-            Assert.AreEqual(expected, actual);
+            AssertPriceShouldEqual(320, books);
         }
 
         [TestMethod]
         public void CalculatePriceTest_五集買的本數_1_1_1_1_1_總價_375()
         {
-            // arrange
-            var shoppingCart = new ShoppingCart();
-            var potterBooks = new List<PotterBook>()
-            {
-                new PotterBook {Episode = 1},
-                new PotterBook {Episode = 2},
-                new PotterBook {Episode = 3},
-                new PotterBook {Episode = 4},
-                new PotterBook {Episode = 5}
-            };
+            var books = GeneratePotterBooksByEpisodeCount(
+                ep1Count: 1,
+                ep2Count: 1,
+                ep3Count: 1,
+                ep4Count: 1,
+                ep5Count: 1
+            );
 
-            var expected = 375;
-
-            // act
-            var actual = shoppingCart.CalculateSuitePrice(potterBooks);
-
-            // assert
-            Assert.AreEqual(expected, actual);
+            AssertPriceShouldEqual(375, books);
         }
 
         [TestMethod]
         public void CalculatePriceTest_五集買的本數_1_1_2_0_0_總價_370()
         {
-            // arrange
-            var shoppingCart = new ShoppingCart();
-            var potterBooks = new List<PotterBook>()
-            {
-                new PotterBook {Episode = 1},
-                new PotterBook {Episode = 2},
-                new PotterBook {Episode = 3},
-                new PotterBook {Episode = 3}
-            };
+            var books = GeneratePotterBooksByEpisodeCount(
+                ep1Count: 1,
+                ep2Count: 1,
+                ep3Count: 2
+            );
 
-            var expected = 370;
-
-            // act
-            var actual = shoppingCart.CalculateSuitePrice(potterBooks);
-
-            // assert
-            Assert.AreEqual(expected, actual);
+            AssertPriceShouldEqual(370, books);
         }
 
         [TestMethod]
         public void CalculatePriceTest_五集買的本數_1_2_2_0_0_總價_460()
         {
-            // arrange
-            var shoppingCart = new ShoppingCart();
-            var potterBooks = new List<PotterBook>()
-            {
-                new PotterBook {Episode = 1},
-                new PotterBook {Episode = 2},
-                new PotterBook {Episode = 2},
-                new PotterBook {Episode = 3},
-                new PotterBook {Episode = 3}
-            };
+            var books = GeneratePotterBooksByEpisodeCount(
+                ep1Count: 1,
+                ep2Count: 2,
+                ep3Count: 2
+            );
 
-            var expected = 460;
-
-            // act
-            var actual = shoppingCart.CalculateSuitePrice(potterBooks);
-
-            // assert
-            Assert.AreEqual(expected, actual);
+            AssertPriceShouldEqual(460, books);
         }
 
         [TestMethod]
         public void CalculatePriceTest_五集買的本數_2_2_2_1_1_總價_640()
         {
-            // arrange
-            var shoppingCart = new ShoppingCart();
-            var potterBooks = new List<PotterBook>()
-            {
-                new PotterBook {Episode = 1},
-                new PotterBook {Episode = 1},
-                new PotterBook {Episode = 2},
-                new PotterBook {Episode = 2},
-                new PotterBook {Episode = 3},
-                new PotterBook {Episode = 3},
-                new PotterBook {Episode = 4},
-                new PotterBook {Episode = 5}
-            };
+            var books = GeneratePotterBooksByEpisodeCount(
+                ep1Count: 2,
+                ep2Count: 2,
+                ep3Count: 2,
+                ep4Count: 1,
+                ep5Count: 1
+            );
 
-            var expected = 640;
-
-            // act
-            var actual = shoppingCart.CalculateSuitePrice(potterBooks);
-
-            // assert
-            Assert.AreEqual(expected, actual);
+            AssertPriceShouldEqual(640, books);
         }
 
         [TestMethod]
         public void CalculatePriceTest_五集買的本數_2_2_2_2_1_總價_695()
         {
-            // arrange
-            var shoppingCart = new ShoppingCart();
-            var potterBooks = new List<PotterBook>()
-            {
-                new PotterBook {Episode = 1},
-                new PotterBook {Episode = 1},
-                new PotterBook {Episode = 2},
-                new PotterBook {Episode = 2},
-                new PotterBook {Episode = 3},
-                new PotterBook {Episode = 3},
-                new PotterBook {Episode = 4},
-                new PotterBook {Episode = 4},
-                new PotterBook {Episode = 5}
-            };
+            var books = GeneratePotterBooksByEpisodeCount(
+                ep1Count: 2,
+                ep2Count: 2,
+                ep3Count: 2,
+                ep4Count: 2,
+                ep5Count: 1
+            );
 
-            var expected = 695;
-
-            // act
-            var actual = shoppingCart.CalculateSuitePrice(potterBooks);
-
-            // assert
-            Assert.AreEqual(expected, actual);
+            AssertPriceShouldEqual(695, books);
         }
 
         [TestMethod]
         public void CalculatePriceTest_五集買的本數_4_4_4_2_2_總價_1280()
         {
-            // arrange
-            var shoppingCart = new ShoppingCart();
-            var potterBooks = new List<PotterBook>()
-            {
-                new PotterBook {Episode = 1},
-                new PotterBook {Episode = 1},
-                new PotterBook {Episode = 1},
-                new PotterBook {Episode = 1},
-                new PotterBook {Episode = 2},
-                new PotterBook {Episode = 2},
-                new PotterBook {Episode = 2},
-                new PotterBook {Episode = 2},
-                new PotterBook {Episode = 3},
-                new PotterBook {Episode = 3},
-                new PotterBook {Episode = 3},
-                new PotterBook {Episode = 3},
-                new PotterBook {Episode = 4},
-                new PotterBook {Episode = 4},
-                new PotterBook {Episode = 5},
-                new PotterBook {Episode = 5}
-            };
+            var books = GeneratePotterBooksByEpisodeCount(
+                ep1Count: 4,
+                ep2Count: 4,
+                ep3Count: 4,
+                ep4Count: 2,
+                ep5Count: 2
+            );
 
-            var expected = 1280;
+            AssertPriceShouldEqual(1280, books);
+        }
 
-            // act
-            var actual = shoppingCart.CalculateSuitePrice(potterBooks);
+        private List<PotterBook> GeneratePotterBooksByEpisodeCount(
+            int ep1Count = 0, int ep2Count = 0, int ep3Count = 0,
+            int ep4Count = 0, int ep5Count = 0)
+        {
+            var books = new List<PotterBook>();
+
+            books.AddRange(Enumerable.Repeat(new PotterBook { Episode = 1 }, ep1Count));
+            books.AddRange(Enumerable.Repeat(new PotterBook { Episode = 2 }, ep2Count));
+            books.AddRange(Enumerable.Repeat(new PotterBook { Episode = 3 }, ep3Count));
+            books.AddRange(Enumerable.Repeat(new PotterBook { Episode = 4 }, ep4Count));
+            books.AddRange(Enumerable.Repeat(new PotterBook { Episode = 5 }, ep5Count));
+
+            return books;
+        }
+
+        private void AssertPriceShouldEqual(int expectedPrice, List<PotterBook> books)
+        {
+            var sut = new ShoppingCart();
+
+            var actual = sut.CalculateSuitePrice(books);
 
             // assert
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expectedPrice, actual);
         }
     }
 }

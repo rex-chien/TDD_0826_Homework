@@ -27,7 +27,7 @@ namespace PotterShopCart
         {
             var combinations = ProduceCombinations(potterBooks);
 
-            var a = combinations.Select(suites =>
+            var combinationsPrice = combinations.Select(suites =>
             {
                 return suites.Select(suite =>
                 {
@@ -35,29 +35,9 @@ namespace PotterShopCart
 
                     return suiteCount * PricePerBook * _discountMap[suiteCount];
                 }).Sum();
-            }).Min();
+            });
 
-            return (int)a;
-        }
-
-        private List<List<PotterBook>> ArrangeBooksToSuites(List<PotterBook> potterBooks)
-        {
-            var suites = new List<List<PotterBook>>();
-
-            potterBooks = new List<PotterBook>(potterBooks);
-
-            while (potterBooks.Any())
-            {
-                var episodeGroups = potterBooks.GroupBy(b => b.Episode);
-
-                var suite = episodeGroups.Select(g => g.First()).ToList();
-
-                suite.ForEach(book => potterBooks.Remove(book));
-
-                suites.Add(suite);
-            }
-
-            return suites;
+            return (int)combinationsPrice.Min();
         }
 
         /// <summary>
