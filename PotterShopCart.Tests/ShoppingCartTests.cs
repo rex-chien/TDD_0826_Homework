@@ -133,6 +133,14 @@ namespace PotterShopCart.Tests
             AssertPriceShouldEqual(1280, books);
         }
 
+        [TestMethod]
+        public void CalculatePriceTest_五集買的本數_0_0_0_0_0_總價_0()
+        {
+            var books = GeneratePotterBooksByEpisodeCount();
+
+            AssertPriceShouldEqual(0, books);
+        }
+
         private List<PotterBook> GeneratePotterBooksByEpisodeCount(
             int ep1Count = 0, int ep2Count = 0, int ep3Count = 0,
             int ep4Count = 0, int ep5Count = 0)
