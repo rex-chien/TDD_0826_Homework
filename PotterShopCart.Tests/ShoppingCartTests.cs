@@ -5,6 +5,7 @@ using System.Linq;
 namespace PotterShopCart.Tests
 {
     [TestClass]
+    [Ignore]
     public class ShoppingCartTests
     {
         [TestMethod]
